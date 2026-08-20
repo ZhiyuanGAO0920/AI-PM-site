@@ -1,6 +1,6 @@
 ---
 title: Agent 架构：什么时候不该用 Agent
-description: 从 EIA 的 10-Agent 真实架构出发——Supervisor 并行扇出、Aggregator 零 Token 聚合、Reflection 质检循环。不是教你怎么搭 Agent，是教你什么时候别上 Agent。
+description: 从 EIA（Enterprise Insight Agent）的 10-Agent 真实架构出发——Supervisor 并行扇出、Aggregator 零 Token 聚合、Reflection 质检循环。不是教你怎么搭 Agent，是教你什么时候别上 Agent。
 order: 4
 updated: '2026-08-20'
 tags: ['Agent', '架构', 'Multi-Agent']

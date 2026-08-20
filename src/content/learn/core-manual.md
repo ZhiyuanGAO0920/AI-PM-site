@@ -64,7 +64,7 @@ eyebrow: LEARN
 - **多 Agent**：主管-工人（Supervisor-Worker）、流水线（Pipeline）、协作讨论三种模式；B 端如智能客服按意图分给订单/技术/工单 Agent
 - **评估监控**：特有维度——工具选择准确率、参数准确性、任务完成率、错误恢复、成本控制
 
-→ 架构模式 + EIA 实战看 <a href="/reference/agent-arch/">Agent 架构</a>。
+→ 架构模式 + EIA（Enterprise Insight Agent）实战看 <a href="/reference/agent-arch/">Agent 架构</a>。
 
 ---
 

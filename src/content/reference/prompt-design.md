@@ -1,6 +1,6 @@
 ---
 title: Prompt 工程：迭代方法论比写得好重要
-description: EIA 项目 8 次 Prompt 迭代全记录——INNER JOIN 改 LEFT JOIN 修复 95→100 行、追问点击率 40%→100%、补货可执行率 60%→100%、客户接入 2h→30min。不是教你写 Prompt，是教你迭代 Prompt。
+description: EIA（Enterprise Insight Agent）项目 8 次 Prompt 迭代全记录——INNER JOIN 改 LEFT JOIN 修复 95→100 行、追问点击率 40%→100%、补货可执行率 60%→100%、客户接入 2h→30min。不是教你写 Prompt，是教你迭代 Prompt。
 order: 5
 updated: '2026-08-20'
 tags: ['Prompt', '迭代方法论', '工程化']

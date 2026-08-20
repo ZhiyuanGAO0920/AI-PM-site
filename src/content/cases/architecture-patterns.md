@@ -1,6 +1,6 @@
 ---
 title: 架构模式
-description: EIA 落地的架构模式——版本演进、Multi-Agent 扇出扇入、Reflection 质检、流式优先、三层 Prompt 加载、质量监控。每个模式都附真实坑与数据。
+description: EIA（Enterprise Insight Agent）落地的架构模式——版本演进、Multi-Agent 扇出扇入、Reflection 质检、流式优先、三层 Prompt 加载、质量监控。每个模式都附真实坑与数据。
 order: 5
 updated: '2026-08-20'
 tags: ['架构', '模式', 'EIA']

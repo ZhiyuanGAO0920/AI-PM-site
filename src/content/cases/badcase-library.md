@@ -1,6 +1,6 @@
 ---
 title: BadCase 复盘库
-description: EIA 真实踩坑合集——RLS 注入、追问不相关、隐式 LIMIT 截断、重试率虚高、知识库过期、反馈静默丢失……每条按「现象 → 根因 → 修复 → 教训」四段写，附量化影响和代码。
+description: EIA（Enterprise Insight Agent）真实踩坑合集——RLS 注入、追问不相关、隐式 LIMIT 截断、重试率虚高、知识库过期、反馈静默丢失……每条按「现象 → 根因 → 修复 → 教训」四段写，附量化影响和代码。
 order: 4
 updated: '2026-08-20'
 tags: ['BadCase', '复盘', '踩坑']

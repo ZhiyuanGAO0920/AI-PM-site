@@ -74,7 +74,7 @@ eyebrow: LEARN
 
 ## PM 视角提炼：课程里最该记住的 5 条
 
-这些是吴恩达反复强调、又和我在 [EIA 项目](/cases/eia-seven-principles/) 真实踩坑互相印证的：
+这些是吴恩达反复强调、又和我在 [EIA（Enterprise Insight Agent）项目](/cases/eia-seven-principles/) 真实踩坑互相印证的：
 
 1. **任务拆分法 = 产品需求拆解的前置能力**。判断"这块能不能用 AI"，本质就是把工作拆成最小单元、标清楚哪些人机协同。和我"配置化 > 定制化"的产品观同源——先抽象规则，再决定交给模型还是写死。
 2. **成本是产品设计的一级约束**。"优先 RAG 替代微调""达到 HLP 就上线别追超人类精度"——吴恩达的降本思路，正是我做 [LLM 选型](/reference/llm-selection/) 时量化成本差（DeepSeek vs Opus 差 50 倍）的依据。

@@ -1,6 +1,6 @@
 ---
 title: AI 评估体系：用数据驱动而非感觉
-description: EIA 五维指标体系（SQL 85%、Reflection 95%、P95 45s、幻觉 0%、成本 ¥0.04）+ 20 条评估集 + 4 组 A/B 测试 + LLM-as-a-Judge 的 2/5 不一致坑。没有评估集，优化就是盲人摸象。
+description: EIA（Enterprise Insight Agent）五维指标体系（SQL 85%、Reflection 95%、P95 45s、幻觉 0%、成本 ¥0.04）+ 20 条评估集 + 4 组 A/B 测试 + LLM-as-a-Judge 的 2/5 不一致坑。没有评估集，优化就是盲人摸象。
 order: 6
 updated: '2026-08-20'
 tags: ['评估', 'Eval', 'A/B测试']

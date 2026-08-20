@@ -1,6 +1,6 @@
 ---
 title: LLM 选型：ROI 决策不是追最强
-description: 怎么选模型——决策树、EIA 20 条评估集实测对比、成本量化、选型矩阵。选型本质是 ROI 决策，3% 精度差 vs 15 倍成本差，后者直接决定定价空间。
+description: 怎么选模型——决策树、EIA（Enterprise Insight Agent）20 条评估集实测对比、成本量化、选型矩阵。选型本质是 ROI 决策，3% 精度差 vs 15 倍成本差，后者直接决定定价空间。
 order: 2
 updated: '2026-08-20'
 tags: ['LLM', '选型', '成本']

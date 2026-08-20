@@ -1,6 +1,6 @@
 ---
 title: 13 条产品决策：从选型到灰度
-description: EIA 项目 13 条关键决策记录，其中 4 条完整故事深挖——选 DeepSeek 不选 GPT-4o 的 ROI 账、Reflection 只重试 1 次的用户体验权衡、本地 BGE-M3 零成本 Embedding、Feature Flag 灰度开关。每条附量化数据，欢迎验证。
+description: EIA（Enterprise Insight Agent）项目 13 条关键决策记录，其中 4 条完整故事深挖——选 DeepSeek 不选 GPT-4o 的 ROI 账、Reflection 只重试 1 次的用户体验权衡、本地 BGE-M3 零成本 Embedding、Feature Flag 灰度开关。每条附量化数据，欢迎验证。
 order: 3
 updated: '2026-08-20'
 tags: ['决策', 'EIA', '复盘']

@@ -7,7 +7,7 @@ tags: ['Multi-Agent', 'Dify', 'Supervisor 路由', '项目治理', '回归测试
 eyebrow: CASES
 ---
 
-> 这是我在转型 AI PM 过程中做的第三个 AI 产品。和 EIA（企业级 B 端）不同，和求职 Agent（个人级 C 端）也不同——这是一个 **Meta 级 AI 产品**：一个帮产品经理做 AI 产品决策的 Agent 系统。它不解决某个具体业务问题，它解决"怎么把 AI 产品方法论工程化"的问题。
+> 这是我在转型 AI PM 过程中做的第三个 AI 产品。和 EIA（Enterprise Insight Agent，企业级 B 端）不同，和求职 Agent（个人级 C 端）也不同——这是一个 **Meta 级 AI 产品**：一个帮产品经理做 AI 产品决策的 Agent 系统。它不解决某个具体业务问题，它解决"怎么把 AI 产品方法论工程化"的问题。
 
 ## 这是什么
 

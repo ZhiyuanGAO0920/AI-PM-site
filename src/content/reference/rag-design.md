@@ -1,6 +1,6 @@
 ---
 title: RAG 架构：从分块到溯源的工程决策
-description: 标准 RAG 流程 + EIA 三个真实工程决策——本地 BGE-M3 零成本 Embedding、客户 Schema 动态适配 2h→30min、知识库过期导致 30 门店错答。不是教 RAG 是什么，是教你 RAG 落地时踩什么坑。
+description: 标准 RAG 流程 + EIA（Enterprise Insight Agent）三个真实工程决策——本地 BGE-M3 零成本 Embedding、客户 Schema 动态适配 2h→30min、知识库过期导致 30 门店错答。不是教 RAG 是什么，是教你 RAG 落地时踩什么坑。
 order: 3
 updated: '2026-08-20'
 tags: ['RAG', '向量检索', 'Embedding']
