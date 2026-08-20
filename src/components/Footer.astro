@@ -1,0 +1,39 @@
+---
+import { SITE } from '../consts';
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container f-inner">
+    <div>
+      {SITE.title} · 一个 B 端产品人转 AI PM 的真实记录
+    </div>
+    <div class="footer-contact">
+      <span class="contact-prompt">内容有疑问或想交流？联系我：</span>
+      <a href={SITE.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+      <span class="sep">·</span>
+      <a href="#" class="mail-reveal" data-u={SITE.email.split('@')[0]} data-d={SITE.email.split('@')[1]} aria-label="Email">Email</a>
+    </div>
+    <div>
+      最后整体核验：{SITE.verified} · © {year} {SITE.author}
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.mail-reveal').forEach(el => {
+    const assemble = () => {
+      const email = el.dataset.u + '@' + el.dataset.d;
+      el.href = 'mailto:' + email;
+      return email;
+    };
+    el.addEventListener('mouseenter', assemble);
+    el.addEventListener('focus', assemble);
+    el.addEventListener('click', e => {
+      e.preventDefault();
+      const email = assemble();
+      el.textContent = email;
+      el.classList.remove('mail-reveal');
+    });
+  });
+</script>

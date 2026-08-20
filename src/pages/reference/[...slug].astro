@@ -1,0 +1,43 @@
+---
+import { getCollection, render } from 'astro:content';
+import ContentLayout from '../../components/ContentLayout.astro';
+
+export async function getStaticPaths() {
+  const docs = await getCollection('reference');
+  return docs
+    .filter((d) => !d.data.draft)
+    .map((doc) => ({
+    params: { slug: doc.id },
+    props: { doc },
+  }));
+}
+
+const { doc } = Astro.props;
+const { Content, headings } = await render(doc);
+const { title, description, eyebrow, updated, tags } = doc.data;
+
+const all = (await getCollection('reference'))
+  .filter((d) => !d.data.draft)
+  .sort((a, b) => a.data.order - b.data.order);
+const idx = all.findIndex((d) => d.id === doc.id);
+const prevDoc = idx > 0 ? all[idx - 1] : null;
+const nextDoc = idx < all.length - 1 ? all[idx + 1] : null;
+const prev = prevDoc ? { href: `/reference/${prevDoc.id}/`, title: prevDoc.data.title } : undefined;
+const next = nextDoc ? { href: `/reference/${nextDoc.id}/`, title: nextDoc.data.title } : undefined;
+---
+
+<ContentLayout
+  title={title}
+  lead={description}
+  eyebrow={eyebrow ?? 'REFERENCE'}
+  updated={updated}
+  tags={tags}
+  current="/reference/"
+  crumbLabel="参考库"
+  crumbHref="/reference/"
+  prev={prev}
+  next={next}
+  headings={headings}
+>
+  <Content />
+</ContentLayout>

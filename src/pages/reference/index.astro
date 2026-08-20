@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const docs = (await getCollection('reference'))
+  .filter((d) => !d.data.draft)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="参考库" description="随时查阅的 AI 产品知识地图" current="/reference/">
+  <div class="container">
+    <div class="crumbs"><a href="/">首页</a><span>/</span>参考库</div>
+    <header class="page-head">
+      <div class="eyebrow">REFERENCE</div>
+      <h1>参考库：AI 产品知识地图</h1>
+      <p class="lead">
+        按主题网状组织，随用随查。能力模型、LLM 选型、RAG、Agent、Prompt、评估体系——
+        每块都尽量附量化数据和真实来源，而不是泛泛的定义。
+      </p>
+    </header>
+
+    <aside class="ref-cta">
+      <p class="ref-cta-lead">先说你要做什么，我再帮你选工具。</p>
+      <p class="ref-cta-body">
+        不确定从哪篇看起？挑你<strong>眼下最疼的问题</strong>进——
+        想搞清楚选哪个模型看 <a href="/reference/llm-selection/">LLM 选型</a>，
+        想接外部数据看 <a href="/reference/rag-design/">RAG</a>，
+        想检验 AI 做得对不对看 <a href="/reference/eval-system/">评估体系</a>。
+        下面每篇都标了最后核验日期，敢让你查。
+      </p>
+    </aside>
+
+    <section class="section" style="padding-top:8px">
+      <div class="card-grid">
+        {docs.map((d) => (
+          <a class="doc-card" href={`/reference/${d.id}/`}>
+            <span class="dc-order">#{String(d.data.order).padStart(2, '0')}</span>
+            <h3>{d.data.title}</h3>
+            {d.data.description && <p>{d.data.description}</p>}
+            <div class="tag-row">
+              {d.data.updated && <span class="verified">✓ 核验 {d.data.updated}</span>}
+              {d.data.tags?.map((t) => <span class="tag">{t}</span>)}
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

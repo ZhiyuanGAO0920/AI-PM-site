@@ -1,0 +1,97 @@
+---
+import { SITE, NAV } from '../consts';
+
+interface Props {
+  current?: string;
+}
+const { current } = Astro.props;
+const isActive = (href: string) =>
+  href === '/' ? current === '/' : (current ?? '').startsWith(href);
+---
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="/">{SITE.title}</a>
+    <button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav-links" id="nav-links">
+      {NAV.map((item) => (
+        <a class={isActive(item.href) ? 'active' : ''} href={item.href}>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+    <button class="theme-toggle" type="button" aria-label="切换深色/浅色模式" title="切换深色/浅色模式">
+      <span class="icon-sun">☀</span>
+      <span class="icon-moon">🌙</span>
+    </button>
+  </div>
+</header>
+
+<script>
+  const btn = document.querySelector('.nav-toggle');
+  const links = document.getElementById('nav-links');
+  const menuLinks = links ? Array.from(links.querySelectorAll('a')) : [];
+  const firstLink = menuLinks[0];
+  const lastLink = menuLinks[menuLinks.length - 1];
+
+  const closeMenu = () => {
+    links?.classList.remove('open');
+    btn?.classList.remove('open');
+    btn?.setAttribute('aria-expanded', 'false');
+  };
+
+  const openMenu = () => {
+    links?.classList.add('open');
+    btn?.classList.add('open');
+    btn?.setAttribute('aria-expanded', 'true');
+    firstLink?.focus();
+  };
+
+  btn?.addEventListener('click', () => {
+    links?.classList.contains('open') ? closeMenu() : openMenu();
+  });
+
+  // 点击菜单外部关闭
+  document.addEventListener('click', (e) => {
+    if (!links?.classList.contains('open')) return;
+    if (!btn?.contains(e.target) && !links?.contains(e.target)) {
+      closeMenu();
+    }
+  });
+
+  // Escape 键关闭并还原焦点
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && links?.classList.contains('open')) {
+      closeMenu();
+      btn?.focus();
+    }
+  });
+
+  // Focus trap：Tab 在菜单内循环
+  lastLink?.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab' && !e.shiftKey) {
+      e.preventDefault();
+      firstLink?.focus();
+    }
+  });
+  firstLink?.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab' && e.shiftKey) {
+      e.preventDefault();
+      lastLink?.focus();
+    }
+  });
+
+  // 点击链接后关闭菜单
+  menuLinks.forEach((a) => a.addEventListener('click', closeMenu));
+
+  // 深色模式切换
+  const themeToggle = document.querySelector('.theme-toggle');
+  themeToggle?.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+</script>

@@ -1,0 +1,9 @@
+{
+  "$schema": "https://cloudbase.net/schema.json",
+  "envId": "ai-pm-site-d0g2id0usfe50d5ab",
+  "region": "ap-shanghai",
+  "hosting": {
+    "dist": "dist",
+    "index": "index.html"
+  }
+}

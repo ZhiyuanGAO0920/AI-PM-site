@@ -1,0 +1,126 @@
+---
+import '../styles/global.css';
+import { SITE, NAV } from '../consts';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  current?: string;
+  image?: string;
+}
+
+const { title, description, current, image } = Astro.props;
+const pageTitle = title ? `${title} · ${SITE.title}` : `${SITE.title} · ${SITE.tagline}`;
+const pageDesc = description ?? SITE.intro;
+const siteUrl = import.meta.env.SITE ?? '';
+const ogImage = new URL(image ?? '/og-default.png', siteUrl).href;
+const pageUrl = new URL(Astro.url.pathname, siteUrl).href;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>
+      (function(){
+        var t = localStorage.getItem('theme');
+        if(!t){ t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; }
+        document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
+    <meta name="description" content={pageDesc} />
+    <link rel="canonical" href={pageUrl} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{pageTitle}</title>
+    <!-- Open Graph / 社交分享卡片 -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.title} />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDesc} />
+    <meta name="twitter:image" content={ogImage} />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": SITE.title,
+      "url": siteUrl,
+      "description": SITE.intro,
+      "author": { "@type": "Person", "name": SITE.author }
+    })} />
+  </head>
+  <body>
+    <div class="reading-progress" id="reading-progress"></div>
+    <Nav current={current} />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" type="button" aria-label="关闭">&times;</button>
+      <img src="" alt="" />
+    </div>
+    <script>
+      // 阅读进度条
+      const bar = document.getElementById('reading-progress');
+      if (bar) {
+        const update = () => {
+          const h = document.documentElement;
+          const scrolled = h.scrollTop;
+          const total = h.scrollHeight - h.clientHeight;
+          bar.style.width = total > 0 ? (scrolled / total * 100) + '%' : '0';
+        };
+        update();
+        window.addEventListener('scroll', update, { passive: true });
+        window.addEventListener('resize', update);
+      }
+      // 代码块复制按钮
+      document.querySelectorAll('.prose pre').forEach(pre => {
+        if (pre.parentElement.classList.contains('code-wrap')) return;
+        const wrap = document.createElement('div');
+        wrap.className = 'code-wrap';
+        pre.parentNode.insertBefore(wrap, pre);
+        wrap.appendChild(pre);
+        const btn = document.createElement('button');
+        btn.className = 'code-copy';
+        btn.textContent = '复制';
+        btn.addEventListener('click', async () => {
+          const code = pre.querySelector('code');
+          const text = code ? code.textContent : pre.textContent;
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = '已复制';
+            btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = '复制'; btn.classList.remove('copied'); }, 2000);
+          } catch {
+            btn.textContent = '复制失败';
+            setTimeout(() => { btn.textContent = '复制'; }, 2000);
+          }
+        });
+        wrap.appendChild(btn);
+      });
+      // 图片灯箱（点击放大）
+      const lb = document.getElementById('lightbox');
+      const lbImg = lb?.querySelector('img');
+      const lbClose = lb?.querySelector('.lightbox-close');
+      const closeLb = () => lb?.classList.remove('open');
+      document.querySelectorAll('.prose img').forEach(img => {
+        img.addEventListener('click', () => {
+          if (!lb || !lbImg) return;
+          lbImg.src = img.src;
+          lbImg.alt = img.alt;
+          lb.classList.add('open');
+        });
+      });
+      lb?.addEventListener('click', (e) => { if (e.target === lb || e.target === lbClose) closeLb(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLb(); });
+    </script>
+  </body>
+</html>

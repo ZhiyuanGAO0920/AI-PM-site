@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="站内搜索" description="搜索全站 AI PM 教程、参考库与实战案例" current="/search">
+  <div class="container">
+    <div class="crumbs">
+      <a href="/">首页</a><span>/</span>站内搜索
+    </div>
+    <header class="page-head">
+      <div class="eyebrow">全站检索</div>
+      <h1>站内搜索</h1>
+      <p class="lead">输入关键词，直达教程、参考库和实战案例。中文也能搜。</p>
+    </header>
+    <div class="search-wrap">
+      <div id="search"></div>
+      <p class="search-hint">
+        搜索索引在构建时生成；本地开发预览可能暂不可用，线上访问正常。
+      </p>
+    </div>
+  </div>
+
+  <link rel="stylesheet" href="/_pagefind/pagefind-ui.css" />
+  <script is:inline src="/_pagefind/pagefind-ui.js"></script>
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.PagefindUI) {
+        new window.PagefindUI({
+          element: '#search',
+          showSubResults: true,
+          showImages: false,
+          translations: {
+            placeholder: '搜「成本」「RAG」「BadCase」…',
+            zero_results: '没有找到关于「[SEARCH_TERM]」的内容',
+          },
+        });
+      }
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .search-wrap {
+    margin-top: 1.5rem;
+  }
+  .search-hint {
+    margin-top: 1rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  /* pagefind UI 主题微调，贴合站点配色 */
+  :global(#search) {
+    --pagefind-ui-primary: #0f172a;
+    --pagefind-ui-font: inherit;
+    --pagefind-ui-border-radius: 8px;
+  }
+</style>

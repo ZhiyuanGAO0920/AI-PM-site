@@ -1,0 +1,21 @@
+{
+  "name": "ai-pm-site",
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "python scripts/gen-og.py && astro build && pagefind --site dist --output-subdir _pagefind",
+    "preview": "astro preview",
+    "astro": "astro",
+    "deploy": "tcb hosting deploy dist"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.0",
+    "astro": "^5.13.0"
+  },
+  "devDependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "@cloudbase/cli": "^3.7.3",
+    "pagefind": "^1.5.2"
+  }
+}

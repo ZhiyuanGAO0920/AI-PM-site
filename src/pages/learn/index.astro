@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const docs = (await getCollection('learn'))
+  .filter((d) => !d.data.draft)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="教程" description="从 B 端 PM 到 AI PM 的线性学习路径" current="/learn/">
+  <div class="container">
+    <div class="crumbs"><a href="/">首页</a><span>/</span>教程</div>
+    <header class="page-head">
+      <div class="eyebrow">LEARN</div>
+      <h1>教程：12 周从 B 端 PM 到 AI PM</h1>
+      <p class="lead">
+        不是光看不练。每周有产出要求，四阶段递进：技术认知 → Prompt 工程 → 实战方法论 → 作品集。
+        按编号顺序看可以走完整条路线，也可以只挑眼下有用的那一篇。
+      </p>
+    </header>
+
+    <section class="section" style="padding-top:8px">
+      <div class="card-grid">
+        {docs.map((d) => (
+          <a class="doc-card" href={`/learn/${d.id}/`}>
+            <span class="dc-order">#{String(d.data.order).padStart(2, '0')}</span>
+            <h3>{d.data.title}</h3>
+            {d.data.description && <p>{d.data.description}</p>}
+            <div class="tag-row">
+              {d.data.updated && <span class="verified">✓ 核验 {d.data.updated}</span>}
+              {d.data.tags?.map((t) => <span class="tag">{t}</span>)}
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

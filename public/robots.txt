@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ai-pm-site-d0g2id0usfe50d5ab-1471526534.tcloudbaseapp.com/sitemap-index.xml

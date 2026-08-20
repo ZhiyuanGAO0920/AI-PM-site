@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE, PATHS } from '../consts';
+import VerifiedTag from '../components/VerifiedTag.astro';
+---
+
+<BaseLayout current="/">
+  <section class="hero">
+    <div class="container">
+      <div class="hero-eyebrow">AI PM · 转型笔记</div>
+      <h1>AI 产品经理，从看得懂到做得对。</h1>
+      <p class="tagline">{SITE.tagline}</p>
+      <p class="intro">{SITE.intro}</p>
+      <p class="start-here">第一次来？从 <a href="/learn/12-week-plan/">12 周转型路线</a> 开始 →</p>
+      <div class="path-cards">
+        <div class="paths">
+          {PATHS.map((p, i) => (
+            <a class={`path-card${i === 0 ? ' path-card-featured' : ''}`} href={p.href}>
+              {i === 0 && <span class="pc-badge">推荐起点</span>}
+              <span class="pc-label">{p.label}</span>
+              <h3>{p.title}</h3>
+              <p>{p.desc}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item"><span class="stat-num">22</span><span class="stat-label">篇深度内容</span></div>
+        <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">个真实 AI 产品</span></div>
+        <div class="stat-item"><span class="stat-num">13</span><span class="stat-label">条产品决策</span></div>
+        <div class="stat-item"><span class="stat-num">7</span><span class="stat-label">条 BadCase 复盘</span></div>
+        <div class="stat-item"><span class="stat-num">1</span><span class="stat-label">个在线工具</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>30 秒了解这个站</h2>
+        <p>看视频快速了解站点全貌，再决定从哪开始。</p>
+      </div>
+      <div class="video-wrap">
+        <video controls preload="metadata" poster="/og-default.png" style="width:100%;border-radius:8px;">
+          <source src="/ai-pm-site-intro.mp4" type="video/mp4" />
+          你的浏览器不支持视频播放，可以直接看下面的文字版。
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>这个站和别处有什么不同</h2>
+        <p>不是又一份 AI 资讯搬运，是带量化数据和个人判断的经验库。</p>
+      </div>
+      <div class="card-grid">
+        <div class="doc-card">
+          <div class="doc-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+          <h3>真实项目背书</h3>
+          <p>所有原则、决策、踩坑都来自三个真实 AI 产品：EIA（企业级）、求职 Agent（个人级）、Copilot（Meta 级），不是纸上谈兵。</p>
+        </div>
+        <div class="doc-card">
+          <div class="doc-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></svg></div>
+          <h3>量化而非感觉</h3>
+          <p>「成本差 15 倍」「信任度 +80%」「重试 1 次而非 2 次」——用数据说话。</p>
+        </div>
+        <div class="doc-card">
+          <div class="doc-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01"/><path d="M9 12v.01"/><path d="M9 15v.01"/></svg></div>
+          <h3>B 端 PM 视角</h3>
+          <p>「规则 vs AI 分工」「配置化 vs 定制化」——只有做过企业级产品的人才写得出。</p>
+        </div>
+        <div class="doc-card">
+          <div class="doc-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h3>可验证的信任</h3>
+          <p>每篇标最后核验日期，案例标真实来源。你可以验证，而不只是听我说。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <h2>先想清楚：你为什么需要 AI PM 视角</h2>
+        <p>传统 PM 的三个能力在 AI 时代不够用了。</p>
+      </div>
+      <div class="prose" style="padding-top:0">
+        <p>
+          AI 产品的核心问题不是「需求 vs 功能」，而是「问题 vs AI 能力」。上线后也不是功能验收，
+          而是<strong>持续评估与优化</strong>。最大的风险不是功能缺陷，而是<strong>幻觉、不可控、安全</strong>。
+        </p>
+        <p>
+          所以 AI PM 要在「业务 + 用户」之外，再叠一层「AI 技术理解」。本站三条路径覆盖完整能力闭环：
+          <a href="/learn/">教程</a>（系统建立认知，含 12 周路线 + 吴恩达精读 + Prompt 模板）、
+          <a href="/reference/">参考库</a>（7 篇深度文章，LLM/RAG/Agent/Prompt/评估/交互设计，附实测数据）、
+          <a href="/cases/">实战案例</a>（三个真实 AI 产品 11 个页面：EIA 设计原则与 13 条决策 + 求职 Agent 架构与安全设计 + Copilot 8 Agent 系统与 O1-O12 项目治理，从设计原则到 BadCase 到商业思考，完整呈现决策过程）。
+        </p>
+        <p><VerifiedTag date={SITE.verified} /></p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

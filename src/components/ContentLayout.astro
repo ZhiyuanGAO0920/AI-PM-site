@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../consts';
+import VerifiedTag from '../components/VerifiedTag.astro';
+import PrevNext from '../components/PrevNext.astro';
+
+interface Props {
+  title: string;
+  lead?: string;
+  eyebrow?: string;
+  updated?: string;
+  tags?: string[];
+  current?: string;
+  crumbLabel: string;
+  crumbHref: string;
+  prev?: { href: string; title: string };
+  next?: { href: string; title: string };
+  headings?: { depth: number; slug: string; text: string }[];
+}
+const {
+  title,
+  lead,
+  eyebrow,
+  updated,
+  tags,
+  current,
+  crumbLabel,
+  crumbHref,
+  prev,
+  next,
+  headings = [],
+} = Astro.props;
+
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
+const tocH2Count = toc.filter((h) => h.depth === 2).length;
+const showToc = tocH2Count >= 4;
+---
+
+<BaseLayout title={title} description={lead} current={current}>
+  <div class="container">
+    <div class="crumbs">
+      <a href="/">首页</a><span>/</span>
+      <a href={crumbHref}>{crumbLabel}</a><span>/</span>
+      {title}
+    </div>
+    <header class="page-head">
+      {eyebrow && <div class="eyebrow">{eyebrow}</div>}
+      <h1>{title}</h1>
+      {lead && <p class="lead">{lead}</p>}
+      <div class="page-meta">
+        <VerifiedTag date={updated} />
+        {tags && tags.map((t) => <span class="tag">{t}</span>)}
+      </div>
+      <div class="page-meta-secondary">整理者：{SITE.author}</div>
+    </header>
+    {showToc && (
+      <nav class="toc" aria-label="目录">
+        <div class="toc-title">本页目录</div>
+        <ul>
+          {toc.map((h) => (
+            <li class={h.depth === 3 ? 'toc-h3' : ''}>
+              <a href={`#${h.slug}`}>{h.text}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )}
+    <article class="prose" data-pagefind-body>
+      <slot />
+    </article>
+    <PrevNext prev={prev} next={next} />
+  </div>
+</BaseLayout>

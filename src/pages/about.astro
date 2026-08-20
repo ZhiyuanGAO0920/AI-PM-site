@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../consts';
+import VerifiedTag from '../components/VerifiedTag.astro';
+---
+
+<BaseLayout title="关于" description="关于作者高志远，以及这个 AI PM 入门站的由来" current="/about">
+  <div class="container">
+    <div class="crumbs">
+      <a href="/">首页</a><span>/</span>关于
+    </div>
+    <header class="page-head">
+      <div class="eyebrow">关于这个站</div>
+      <h1>为什么会有这个站</h1>
+      <p class="lead">
+        一个正在从 B 端产品转 AI PM 的人，把自己验证过的判断整理出来——而不是又一份 AI 资讯搬运。
+      </p>
+    </header>
+
+    <article class="prose">
+      <h2>我是谁</h2>
+      <p>
+        高志远，6 年 B 端产品经验（美业 SaaS 垂直），近 2 年转型做 AI 产品经理，经手过 800+ 条需求，其中主动拒绝了 100+ 条。
+      </p>
+      <p>
+        不是技术出身，也不是纯商业背景。我是那种夹在「客户永远要个性化」和「产品不能跟着每个客户走」之间的产品人——
+        这恰好是 AI 时代最该补的一类视角：知道哪些该用确定性规则，哪些该交给模型。
+      </p>
+
+      <h2>这个站放什么</h2>
+      <ul>
+        <li>
+          <strong><a href="/learn/">教程</a></strong>（4 篇）：12 周转型路线、核心知识手册、吴恩达课程精读笔记、9 个 Prompt 模板。每周有产出要求，不是光看不练。
+        </li>
+        <li>
+          <strong><a href="/reference/">参考库</a></strong>（7 篇）：能力模型、LLM 选型、RAG、Agent、Prompt 工程、评估体系、AI 交互设计——每篇附 EIA 项目实测数据和工程代码。
+        </li>
+        <li>
+          <strong><a href="/cases/">实战案例</a></strong>（11 篇）：EIA 项目概览、七条设计原则、13 条产品决策、架构模式、7 条 BadCase 复盘（2 条深度页面）、商业思考、转型记录、求职 Agent 设计决策、AI PM Copilot 8 Agent 系统。三个不同层次的 AI 产品，既是学习材料，也是我的求职作品集。
+        </li>
+      </ul>
+
+      <h2>我的产品观（节选）</h2>
+      <ul>
+        <li><strong>配置化 &gt; 定制化</strong>：用参数化架构吸收差异，而不是用定制代码妥协。</li>
+        <li><strong>AI 是嵌入业务流程的能力</strong>，不是独立聊天 Bot——用户打开页面就该直接看到结果。</li>
+        <li><strong>成本是产品设计的一级约束</strong>，不是运维的事——它直接决定定价空间和目标市场。</li>
+        <li><strong>「够好就行」</strong>：追求用户可接受的阈值，而非完美。85% 质量 + 45 秒，往往好过 95% 质量 + 60 秒。</li>
+        <li><strong>信任来自可验证</strong>：结论要有可解释性、反馈闭环和人工干预入口。</li>
+      </ul>
+
+      <h2>你能在哪找到我</h2>
+      <p>
+        这个站本身也是我的求职作品集。如果你在招 AI PM，或者想交流转型经验，欢迎通过以下方式联系我：
+      </p>
+      <ul class="contact-list">
+        <li>
+          <strong>GitHub</strong>：<a href={SITE.github} target="_blank" rel="noopener noreferrer">@ZhiyuanGAO0920</a>
+          <span class="contact-note">代码、项目笔记、踩坑记录都在这</span>
+        </li>
+        <li>
+          <strong>邮箱</strong>：<a href="#" class="mail-reveal" data-u={SITE.email.split('@')[0]} data-d={SITE.email.split('@')[1]}>点击显示邮箱</a>
+          <span class="contact-note">合作、交流、内推都可以聊</span>
+        </li>
+      </ul>
+      <p>也可以先看看 <a href="/cases/decision-cases/">13 条产品决策</a>、<a href="/cases/ai-pm-copilot/">Copilot 8 Agent 系统</a>或<a href="/cases/transition-record/">转型记录</a>，了解我的产品决策思路和转型路径。</p>
+      <p><VerifiedTag date={SITE.verified} /></p>
+    </article>
+  </div>
+</BaseLayout>

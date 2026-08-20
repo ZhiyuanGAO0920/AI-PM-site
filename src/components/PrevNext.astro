@@ -1,0 +1,30 @@
+---
+interface Props {
+  prev?: { href: string; title: string };
+  next?: { href: string; title: string };
+}
+const { prev, next } = Astro.props;
+---
+
+{
+  prev || next ? (
+    <nav class="prevnext">
+      {prev ? (
+        <a class="pn pn-prev" href={prev.href}>
+          <span class="pn-dir">← 上一篇</span>
+          <span class="pn-title">{prev.title}</span>
+        </a>
+      ) : (
+        <span class="pn pn-empty" />
+      )}
+      {next ? (
+        <a class="pn pn-next" href={next.href}>
+          <span class="pn-dir">下一篇 →</span>
+          <span class="pn-title">{next.title}</span>
+        </a>
+      ) : (
+        <span class="pn pn-empty" />
+      )}
+    </nav>
+  ) : null
+}
