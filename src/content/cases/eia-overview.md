@@ -7,7 +7,7 @@ tags: ['EIA', '项目概览', '求职作品']
 eyebrow: CASES
 ---
 
-> 这是 EIA（Enterprise Insight Agent）项目的入口概览。详细的决策、架构、踩坑见下方链接，这里是 1 分钟版。
+> 这是 EIA（Enterprise Insight Agent，企业洞察智能体）项目的入口概览。详细的决策、架构、踩坑见下方链接，这里是 1 分钟版。
 
 ## EIA 是什么
 
