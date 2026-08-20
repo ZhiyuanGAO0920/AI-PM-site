@@ -10,7 +10,7 @@ export const SITE = {
     '不堆 AI 资讯，不教玄学。22 篇内容 + 1 个可体验的 AI 求职工具，全部来自三个真实 AI 产品验证：通用 AI 知识科普（LLM/RAG/Agent/Prompt/评估）+ AI 产品转型实战（EIA 13 条决策 + 求职 Agent 设计决策 + Copilot 8 Agent 系统 + 7 条 BadCase + 成本结构）。每篇标核验日期，数据标来源——你可以验证。',
   author: '高志远',
   email: '934594418@qq.com',
-  github: 'https://github.com/ZhiyuanGAO0920',
+  github: 'https://github.com/ZhiyuanGAO0920/AI-PM-site',
   // 最后整体核验日期，体现"信任来自可验证"
   verified: '2026-08-20',
 };
