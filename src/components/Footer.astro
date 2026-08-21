@@ -5,17 +5,21 @@ const year = new Date().getFullYear();
 
 <footer class="footer">
   <div class="container f-inner">
-    <div>
+    <div class="footer-brand">
       {SITE.title} · 一个 B 端产品人转 AI PM 的真实记录
     </div>
-    <div class="footer-contact">
-      <span class="contact-prompt">内容有疑问或想交流？联系我：</span>
-      <a href={SITE.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
-      <span class="sep">·</span>
-      <a href="#" class="mail-reveal" data-u={SITE.email.split('@')[0]} data-d={SITE.email.split('@')[1]} aria-label="Email">Email</a>
-    </div>
-    <div>
-      最后整体核验：{SITE.verified} · © {year} {SITE.author}
+    <div class="footer-meta">
+      <div class="footer-contact">
+        <span class="contact-prompt">联系我：</span>
+        <span class="contact-links">
+          <a href={SITE.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+          <span class="sep">·</span>
+          <a href="#" class="mail-reveal" data-u={SITE.email.split('@')[0]} data-d={SITE.email.split('@')[1]} aria-label="Email">Email</a>
+        </span>
+      </div>
+      <div class="footer-verified">
+        最后整体核验：{SITE.verified} · © {year} {SITE.author}
+      </div>
     </div>
   </div>
 </footer>

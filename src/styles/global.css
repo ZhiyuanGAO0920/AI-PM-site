@@ -675,8 +675,39 @@ a:hover {
 .footer .f-inner {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 32px;
+}
+/* 品牌区：左侧可伸缩，文字可换行，吸收右侧宽度变化 */
+.footer .footer-brand {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+/* 元信息区：右侧固定，联系方式 + 核验信息归为一组 */
+.footer .footer-meta {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  white-space: nowrap;
+}
+.footer .footer-verified {
+  white-space: nowrap;
+}
+/* 窄屏堆叠，避免横向溢出 */
+@media (max-width: 768px) {
+  .footer .f-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .footer .footer-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 }
 .footer a {
   color: var(--muted);
@@ -1028,8 +1059,17 @@ button:focus-visible {
 .footer-contact {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.25rem;
+}
+.footer-contact .contact-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+.footer-contact .contact-links .mail-reveal {
+  white-space: nowrap;
 }
 .contact-prompt {
   font-size: 0.85rem;
