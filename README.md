@@ -1,5 +1,7 @@
 # 高志远的 AI PM 笔记
 
+[![CI](https://github.com/ZhiyuanGAO0920/AI-PM-site/actions/workflows/deploy.yml/badge.svg)](https://github.com/ZhiyuanGAO0920/AI-PM-site/actions/workflows/deploy.yml)
+
 一个 B 端产品人转 AI PM 的真实记录 + 经过项目验证的经验库。
 
 ## 网站

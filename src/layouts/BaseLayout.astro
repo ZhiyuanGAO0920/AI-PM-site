@@ -63,7 +63,7 @@ const pageUrl = new URL(Astro.url.pathname, siteUrl).href;
       <slot />
     </main>
     <Footer />
-    <div class="lightbox" id="lightbox">
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="图片预览">
       <button class="lightbox-close" type="button" aria-label="关闭">&times;</button>
       <img src="" alt="" />
     </div>
@@ -106,21 +106,32 @@ const pageUrl = new URL(Astro.url.pathname, siteUrl).href;
         });
         wrap.appendChild(btn);
       });
-      // 图片灯箱（点击放大）
+      // 图片灯箱（点击放大）；焦点管理：打开时焦点移入关闭按钮、Tab 不逃逸，关闭时还原
       const lb = document.getElementById('lightbox');
       const lbImg = lb?.querySelector('img');
       const lbClose = lb?.querySelector('.lightbox-close');
-      const closeLb = () => lb?.classList.remove('open');
+      let lbTrigger = null;
+      const closeLb = () => {
+        lb?.classList.remove('open');
+        lbTrigger?.focus?.();
+        lbTrigger = null;
+      };
       document.querySelectorAll('.prose img').forEach(img => {
         img.addEventListener('click', () => {
           if (!lb || !lbImg) return;
+          lbTrigger = document.activeElement;
           lbImg.src = img.src;
           lbImg.alt = img.alt;
           lb.classList.add('open');
+          lbClose?.focus();
         });
       });
       lb?.addEventListener('click', (e) => { if (e.target === lb || e.target === lbClose) closeLb(); });
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLb(); });
+      document.addEventListener('keydown', (e) => {
+        if (!lb?.classList.contains('open')) return;
+        if (e.key === 'Escape') { closeLb(); return; }
+        if (e.key === 'Tab') { e.preventDefault(); lbClose?.focus(); }
+      });
     </script>
   </body>
 </html>
