@@ -90,6 +90,12 @@ const isActive = (href: string) => {
   // 点击链接后关闭菜单
   menuLinks.forEach((a) => a.addEventListener('click', closeMenu));
 
+  // 滚动后 Nav 反馈（阴影加深）
+  const header = document.querySelector('.nav');
+  const onScroll = () => header?.classList.toggle('scrolled', window.scrollY > 40);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
   // 深色模式切换
   const themeToggle = document.querySelector('.theme-toggle');
   themeToggle?.addEventListener('click', () => {

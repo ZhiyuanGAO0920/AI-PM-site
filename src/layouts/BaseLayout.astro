@@ -72,7 +72,7 @@ const pageUrl = new URL(Astro.url.pathname, siteUrl).href;
       const bar = document.getElementById('reading-progress');
       if (bar) {
         const update = () => {
-          const h = document.documentElement;
+          const h = document.scrollingElement || document.documentElement;
           const scrolled = h.scrollTop;
           const total = h.scrollHeight - h.clientHeight;
           bar.style.width = total > 0 ? (scrolled / total * 100) + '%' : '0';

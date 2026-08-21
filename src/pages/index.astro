@@ -15,11 +15,74 @@ const totalDocs = collections.reduce((sum, c) => sum + c.length, 0);
 <BaseLayout current="/">
   <section class="hero">
     <div class="container">
-      <div class="hero-eyebrow">AI PM · 转型笔记</div>
-      <h1>AI 产品经理，从看得懂到做得对。</h1>
-      <p class="tagline">{SITE.tagline}</p>
-      <p class="intro">{SITE.intro}</p>
-      <p class="start-here">第一次来？从 <a href="/learn/12-week-plan/">12 周转型路线</a> 开始 →</p>
+      <div class="hero-grid">
+        <div class="hero-text">
+          <div class="hero-eyebrow">AI PM · 转型笔记</div>
+          <h1><span class="grad-text">AI</span> 产品经理，从看得懂到做得对。</h1>
+          <p class="tagline">{SITE.tagline}</p>
+          <p class="intro">{SITE.intro}</p>
+          <p class="start-here">第一次来？从 <a href="/learn/12-week-plan/">12 周转型路线</a> 开始 →</p>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <svg class="hv-svg" viewBox="0 0 360 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="hvAi" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#2f5bff" />
+                <stop offset="1" stop-color="#7c9bff" />
+              </linearGradient>
+              <filter id="hvGlow" x="-60%" y="-60%" width="220%" height="220%">
+                <feGaussianBlur stdDeviation="7" result="b" />
+                <feMerge>
+                  <feMergeNode in="b" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            <!-- 左侧：传统 B 端三支柱 -->
+            <g class="hv-old" font-family="var(--font)" font-size="14" font-weight="600">
+              <rect x="14" y="26" width="104" height="46" rx="12" fill="#f1f4fa" stroke="#d6dae3" />
+              <rect x="14" y="97" width="104" height="46" rx="12" fill="#f1f4fa" stroke="#d6dae3" />
+              <rect x="14" y="168" width="104" height="46" rx="12" fill="#f1f4fa" stroke="#d6dae3" />
+              <text x="66" y="54" fill="#5b6470" text-anchor="middle">业务</text>
+              <text x="66" y="125" fill="#5b6470" text-anchor="middle">用户</text>
+              <text x="66" y="196" fill="#5b6470" text-anchor="middle">规则</text>
+            </g>
+
+            <!-- 中间连接线（流动） -->
+            <g class="hv-links" stroke="#aab3c4" stroke-width="2" stroke-linecap="round">
+              <path class="hv-link" d="M118 49 H152" />
+              <path class="hv-link" d="M118 120 H152" />
+              <path class="hv-link" d="M118 191 H152" />
+            </g>
+
+            <!-- AI 核心 -->
+            <circle class="hv-core" cx="212" cy="120" r="42" fill="url(#hvAi)" filter="url(#hvGlow)" />
+            <text class="hv-core-label" x="212" y="125" fill="#fff" font-family="var(--font)" font-size="20" font-weight="800" text-anchor="middle">AI</text>
+
+            <!-- 环绕轨道光点（绕 AI 圆心旋转） -->
+            <circle class="hv-orbit" cx="254" cy="120" r="4.5" fill="url(#hvAi)" />
+            <circle class="hv-orbit hv-orbit-2" cx="170" cy="120" r="4.5" fill="url(#hvAi)" />
+
+            <!-- 右侧能力节点 -->
+            <g class="hv-node-group" fill="url(#hvAi)">
+              <circle class="hv-node" cx="312" cy="58" r="17" />
+              <circle class="hv-node" cx="330" cy="120" r="17" />
+              <circle class="hv-node" cx="312" cy="182" r="17" />
+            </g>
+            <g class="hv-links2" stroke="#aab3c4" stroke-width="2" stroke-linecap="round">
+              <path class="hv-link" d="M254 120 L297 62" />
+              <path class="hv-link" d="M254 120 L314 120" />
+              <path class="hv-link" d="M254 120 L297 178" />
+            </g>
+            <text x="312" y="62" fill="#5b6470" font-family="var(--font)" font-size="11" font-weight="700" text-anchor="middle">推理</text>
+            <text x="330" y="124" fill="#5b6470" font-family="var(--font)" font-size="11" font-weight="700" text-anchor="middle">RAG</text>
+            <text x="312" y="186" fill="#5b6470" font-family="var(--font)" font-size="11" font-weight="700" text-anchor="middle">评估</text>
+          </svg>
+        </div>
+      </div>
+
       <div class="path-cards">
         <div class="paths">
           {PATHS.map((p, i) => (
@@ -38,11 +101,11 @@ const totalDocs = collections.reduce((sum, c) => sum + c.length, 0);
   <section class="stats-bar">
     <div class="container">
       <div class="stats-grid">
-        <div class="stat-item"><span class="stat-num">{totalDocs}</span><span class="stat-label">篇深度内容</span></div>
-        <div class="stat-item"><span class="stat-num">{STATS.products}</span><span class="stat-label">个真实 AI 产品</span></div>
-        <div class="stat-item"><span class="stat-num">{STATS.decisions}</span><span class="stat-label">条产品决策</span></div>
-        <div class="stat-item"><span class="stat-num">{STATS.badcases}</span><span class="stat-label">条 BadCase 复盘</span></div>
-        <div class="stat-item"><span class="stat-num">{STATS.tools}</span><span class="stat-label">个在线工具</span></div>
+        <div class="stat-item"><span class="stat-num" data-count={totalDocs}>{totalDocs}</span><span class="stat-label">篇深度内容</span></div>
+        <div class="stat-item"><span class="stat-num" data-count={STATS.products}>{STATS.products}</span><span class="stat-label">个真实 AI 产品</span></div>
+        <div class="stat-item"><span class="stat-num" data-count={STATS.decisions}>{STATS.decisions}</span><span class="stat-label">条产品决策</span></div>
+        <div class="stat-item"><span class="stat-num" data-count={STATS.badcases}>{STATS.badcases}</span><span class="stat-label">条 BadCase 复盘</span></div>
+        <div class="stat-item"><span class="stat-num" data-count={STATS.tools}>{STATS.tools}</span><span class="stat-label">个在线工具</span></div>
       </div>
     </div>
   </section>
@@ -114,4 +177,47 @@ const totalDocs = collections.reduce((sum, c) => sum + c.length, 0);
       </div>
     </div>
   </section>
+
+  <script>
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealTargets = document.querySelectorAll('.section, .path-card, .doc-card, .stat-item');
+
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      revealTargets.forEach((el) => el.classList.add('is-visible'));
+    } else {
+      revealTargets.forEach((el) => el.classList.add('reveal'));
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      revealTargets.forEach((el) => io.observe(el));
+    }
+
+    const counters = document.querySelectorAll('.stat-num[data-count]');
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+      const cio = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          const el = e.target;
+          const target = Number(el.getAttribute('data-count')) || 0;
+          el.textContent = '0';
+          const dur = 900;
+          const start = performance.now();
+          const tick = (now) => {
+            const p = Math.min((now - start) / dur, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = Math.round(target * eased).toString();
+            if (p < 1) requestAnimationFrame(tick);
+            else el.textContent = target.toString();
+          };
+          requestAnimationFrame(tick);
+          cio.unobserve(el);
+        });
+      }, { threshold: 0.4 });
+      counters.forEach((el) => cio.observe(el));
+    }
+  </script>
 </BaseLayout>
