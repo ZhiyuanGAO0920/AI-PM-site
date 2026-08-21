@@ -32,3 +32,6 @@ npm-debug.log*
 
 # TRAE workspace
 .trae/
+
+# Playwright MCP debug artifacts
+.playwright-mcp/
