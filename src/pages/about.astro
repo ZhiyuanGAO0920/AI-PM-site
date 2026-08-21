@@ -2,6 +2,14 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../consts';
 import VerifiedTag from '../components/VerifiedTag.astro';
+import { getCollection } from 'astro:content';
+
+// 篇数从 content collection 动态取（与首页 totalDocs 同源），避免新增内容后这里漂移
+const [caseCount, learnCount, referenceCount] = await Promise.all([
+  getCollection('cases', ({ data }) => !data.draft),
+  getCollection('learn', ({ data }) => !data.draft),
+  getCollection('reference', ({ data }) => !data.draft),
+]).then(([c, l, r]) => [c.length, l.length, r.length]);
 ---
 
 <BaseLayout title="关于" description="关于作者高志远，以及这个 AI PM 入门站的由来" current="/about">
@@ -30,13 +38,13 @@ import VerifiedTag from '../components/VerifiedTag.astro';
       <h2>这个站放什么</h2>
       <ul>
         <li>
-          <strong><a href="/learn/">教程</a></strong>（4 篇）：12 周转型路线、核心知识手册、吴恩达课程精读笔记、9 个 Prompt 模板。每周有产出要求，不是光看不练。
+          <strong><a href="/learn/">教程</a></strong>（{learnCount} 篇）：12 周转型路线、核心知识手册、吴恩达课程精读笔记、9 个 Prompt 模板。每周有产出要求，不是光看不练。
         </li>
         <li>
-          <strong><a href="/reference/">参考库</a></strong>（7 篇）：能力模型、LLM 选型、RAG、Agent、Prompt 工程、评估体系、AI 交互设计——每篇附 EIA（Enterprise Insight Agent，企业洞察智能体）项目实测数据和工程代码。
+          <strong><a href="/reference/">参考库</a></strong>（{referenceCount} 篇）：能力模型、LLM 选型、RAG、Agent、Prompt 工程、评估体系、AI 交互设计——每篇附 EIA（Enterprise Insight Agent，企业洞察智能体）项目实测数据和工程代码。
         </li>
         <li>
-          <strong><a href="/cases/">实战案例</a></strong>（11 篇）：EIA 项目概览、七条设计原则、13 条产品决策、架构模式、7 条 BadCase 复盘（2 条深度页面）、商业思考、转型记录、求职 Agent 设计决策、AI PM Copilot 8 Agent 系统。三个不同层次的 AI 产品，既是学习材料，也是我的求职作品集。
+          <strong><a href="/cases/">实战案例</a></strong>（{caseCount} 篇）：EIA 项目概览、七条设计原则、13 条产品决策、架构模式、7 条 BadCase 复盘（2 条深度页面）、商业思考、转型记录、求职 Agent 设计决策、AI PM Copilot 8 Agent 系统。三个不同层次的 AI 产品，既是学习材料，也是我的求职作品集。
         </li>
       </ul>
 

@@ -8,7 +8,7 @@
 
 ## 内容
 
-- **22 篇 AI PM 学习内容**：科普文章 + 转型指南 + 决策案例 + BadCase 复盘
+- **24 篇 AI PM 学习内容**：科普文章 + 转型指南 + 决策案例 + BadCase 复盘（篇数随内容更新，以站内为准）
 - **3 个真实 AI 产品案例**：EIA Copilot（8 Agent 系统）/ 求职 Agent / 架构模式
 - **在线 AI 求职工具**：四维加权评分、Honesty Rule、Human-in-the-loop
 - **参考库**：LLM 选型、RAG、Agent 架构、Prompt 工程、评估体系
@@ -33,7 +33,7 @@ npm run build    # 构建到 dist/
 src/
 ├── components/    # Nav, Footer, ContentLayout 等
 ├── content/       # Markdown 内容
-│   ├── cases/     # 实战案例（11篇）
+│   ├── cases/     # 实战案例（13篇）
 │   ├── learn/     # 教程（4篇）
 │   └── reference/ # 参考库（7篇）
 ├── layouts/       # BaseLayout

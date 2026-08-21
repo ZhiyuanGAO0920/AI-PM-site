@@ -5,8 +5,12 @@ interface Props {
   current?: string;
 }
 const { current } = Astro.props;
-const isActive = (href: string) =>
-  href === '/' ? current === '/' : (current ?? '').startsWith(href);
+// 兼容无尾斜杠的 current 传参（about/search 页传 "/about"），归一化后再匹配
+const isActive = (href: string) => {
+  if (href === '/') return current === '/';
+  const cur = current ?? '';
+  return (cur.endsWith('/') ? cur : cur + '/').startsWith(href);
+};
 ---
 
 <header class="nav">
