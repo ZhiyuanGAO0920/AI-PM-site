@@ -40,11 +40,9 @@ jobs:
         run: node scripts/check-links.mjs
 
       - name: Deploy to CloudBase
-        env:
-          CLOUDBASE_ENV_ID: ${{ secrets.CLOUDBASE_ENV_ID }}
+        # 认证方式 A：CloudBase 环境 API Key（环境级、最小权限）
+        # 仅需 1 个 Secret：CLOUDBASE_API_KEY（环境 API Key 的 JWT token）
+        # envId 非机密（站点 URL 已公开），直接字面量，与 cloudbaserc.json 保持一致
         run: |
-          # 方式 A：环境级 API Key（推荐）
-          # npx tcb login --cloudbase-api-key "${{ secrets.CLOUDBASE_API_KEY }}" -e "${{ secrets.CLOUDBASE_ENV_ID }}"
-          # 方式 B：账号级永久密钥
-          npx tcb login --apiKeyId "${{ secrets.CLOUDBASE_SECRET_ID }}" --apiKey "${{ secrets.CLOUDBASE_SECRET_KEY }}"
+          npx tcb login --cloudbase-api-key "${{ secrets.CLOUDBASE_API_KEY }}" -e ai-pm-site-d0g2id0usfe50d5ab
           npx tcb hosting deploy dist
