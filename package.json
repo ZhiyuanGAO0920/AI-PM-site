@@ -7,6 +7,7 @@
     "build": "python scripts/gen-og.py && astro build && pagefind --site dist --output-subdir _pagefind",
     "preview": "astro preview",
     "astro": "astro",
+    "sync:agent": "node scripts/sync-agent.mjs",
     "deploy": "tcb hosting deploy dist"
   },
   "dependencies": {

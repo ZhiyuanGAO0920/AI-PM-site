@@ -1,7 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE, PATHS } from '../consts';
+import { SITE, PATHS, STATS } from '../consts';
 import VerifiedTag from '../components/VerifiedTag.astro';
+import { getCollection } from 'astro:content';
+
+const collections = await Promise.all([
+  getCollection('cases', ({ data }) => !data.draft),
+  getCollection('learn', ({ data }) => !data.draft),
+  getCollection('reference', ({ data }) => !data.draft),
+]);
+const totalDocs = collections.reduce((sum, c) => sum + c.length, 0);
 ---
 
 <BaseLayout current="/">
@@ -30,11 +38,11 @@ import VerifiedTag from '../components/VerifiedTag.astro';
   <section class="stats-bar">
     <div class="container">
       <div class="stats-grid">
-        <div class="stat-item"><span class="stat-num">22</span><span class="stat-label">篇深度内容</span></div>
-        <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">个真实 AI 产品</span></div>
-        <div class="stat-item"><span class="stat-num">13</span><span class="stat-label">条产品决策</span></div>
-        <div class="stat-item"><span class="stat-num">7</span><span class="stat-label">条 BadCase 复盘</span></div>
-        <div class="stat-item"><span class="stat-num">1</span><span class="stat-label">个在线工具</span></div>
+        <div class="stat-item"><span class="stat-num">{totalDocs}</span><span class="stat-label">篇深度内容</span></div>
+        <div class="stat-item"><span class="stat-num">{STATS.products}</span><span class="stat-label">个真实 AI 产品</span></div>
+        <div class="stat-item"><span class="stat-num">{STATS.decisions}</span><span class="stat-label">条产品决策</span></div>
+        <div class="stat-item"><span class="stat-num">{STATS.badcases}</span><span class="stat-label">条 BadCase 复盘</span></div>
+        <div class="stat-item"><span class="stat-num">{STATS.tools}</span><span class="stat-label">个在线工具</span></div>
       </div>
     </div>
   </section>

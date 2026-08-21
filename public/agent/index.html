@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+  <!--
+    换域名提示：本文件是纯静态页，无法读取 astro.config.mjs 的 site。
+    若绑定自有域名，除修改 astro.config.mjs 的 site 外，以下绝对地址也需同步修改
+    （社交爬虫要求 OG / canonical 为绝对地址，不能改为相对）：
+      - <link rel="canonical">
+      - <meta property="og:url">
+      - <meta property="og:image">
+  -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="AI 求职 Agent：四维加权评分、Honesty Rule 禁止虚构、Human-in-the-loop 绝不自动投递。示例模式开箱即用，可直接体验评估/定制/面试全流程。" />
@@ -24,7 +32,7 @@
       <span style="opacity:0.4;">·</span>
       <a href="/cases/job-agent/">查看这个工具的产品设计与架构决策</a>
     </div>
-    <div class="banner-right">线上示例模式 · 画像本地保存 · 真实评分需本地后端</div>
+    <div class="banner-right">线上示例模式 · 画像本地保存 · <a href="https://github.com/ZhiyuanGAO0920/ai-job-agent-generic" target="_blank" rel="noopener noreferrer">真实评分需本地后端 📦 自托管</a></div>
   </div>
 
   <header class="topbar">

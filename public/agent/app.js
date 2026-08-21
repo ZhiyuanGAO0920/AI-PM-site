@@ -264,10 +264,7 @@ function updateProfileChip() {
 function bindProfile() {
   const btn = document.getElementById("profile-btn");
   if (btn) btn.addEventListener("click", () => Profile.openWizard());
-  Profile.onSaved(() => {
-    updateProfileChip();
-    els.status.textContent = "✓ 画像已保存到本浏览器（localStorage），下次打开仍在。";
-  });
+  Profile.onSaved(updateProfileChip);
   updateProfileChip();
 }
 // 真实评分前确保有画像；无则打开向导并返回 false
@@ -1138,7 +1135,7 @@ function fileToBase64(file) {
 async function ocrImage(file) {
   if (!file || !file.type || !file.type.startsWith("image/")) return;
   if (storeMode !== "server") {
-    els.ocrStatus.textContent = "✗ 线上版不支持截图识别。本地版支持此功能（GLM 视觉 API）。请直接粘贴 JD 文字（从招聘网站复制即可）";
+    els.ocrStatus.textContent = "✗ 需先启动本地服务（node server/server.js）才能识别截图";
     return;
   }
   els.ocrStatus.textContent = "识别中…";
@@ -1199,7 +1196,7 @@ async function init() {
     els.status.textContent = "本地服务已连接 · 档案持久化保存到服务端文件（清缓存不丢）。";
   } else {
     setMode("sample");
-    els.status.textContent = "线上示例模式 · 可体验评估/定制/面试全流程。画像自动存到本浏览器。截图识别和真实评分需本地启动后端，详见案例页。";
+    els.status.textContent = "未检测到本地服务（node server/server.js）。已切换示例预览；真实评分请先启动服务，档案存于浏览器本地。";
   }
 }
 init();

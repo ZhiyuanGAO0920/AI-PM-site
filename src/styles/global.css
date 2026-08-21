@@ -190,8 +190,8 @@ a:hover {
   gap: 8px;
   padding: 22px 20px;
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background: var(--bg2);
+  border-radius: var(--radius);
+  background: var(--bg-soft);
   text-decoration: none;
   color: var(--fg);
   transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;

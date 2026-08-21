@@ -383,18 +383,16 @@ const Profile = (() => {
 
   // ---------- 云端画像（多画像持久化 + 跨设备） ----------
   let cloudNames = [];
-  let cloudAvailable = false;
   let activeCloudName = null;
   async function listCloud() {
     try {
       const r = await fetch("/api/profiles");
-      if (r.ok) { const j = await r.json(); cloudNames = (j.names || []); cloudAvailable = true; }
-    } catch (_) { cloudNames = []; cloudAvailable = false; }
+      if (r.ok) { const j = await r.json(); cloudNames = (j.names || []); }
+    } catch (_) { cloudNames = []; }
     return cloudNames;
   }
   async function saveCloud(name, p) {
     p = p || get();
-    if (!cloudAvailable) throw new Error("线上版未连接后端，云端保存不可用。画像已自动存到本浏览器（localStorage）。");
     const r = await fetch("/api/profiles", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -422,10 +420,6 @@ const Profile = (() => {
   function renderCloud(activeName) {
     const wrap = document.getElementById("pf-cloud-list");
     if (!wrap) return;
-    if (!cloudAvailable) {
-      wrap.innerHTML = '<p class="cloud-empty">⚠ 线上版未连接后端，云端保存不可用。<br/><br/>你的画像已通过「保存并使用」自动存到本浏览器（localStorage）——同一浏览器下次打开仍在，但换设备或清缓存会丢失。<br/><br/>如需跨设备同步，请<a href="/cases/job-agent/">参考案例页</a>本地启动后端。</p>';
-      return;
-    }
     if (!cloudNames.length) {
       wrap.innerHTML = '<p class="cloud-empty">云端暂无画像。填写后输入名称点「保存到云端」即可建立第一个。</p>';
       return;
