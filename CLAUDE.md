@@ -46,9 +46,13 @@
 - **邮箱防爬**：Footer 与 about 页用 `mail-reveal` 模式（`data-u`/`data-d` 拼接），新增联系入口沿用此模式，不要直接写死邮箱文本。
 - **OG 图**：`gen-og.py` 只生成全局默认图 `og-default.png`；各页面共用，未做 per-page 图（有意取舍，勿自行扩展）。
 - **域名**：`site` 配置在 [astro.config.mjs](astro.config.mjs) 与 [public/agent/index.html](public/agent/index.html) 头部的 canonical/OG 绝对地址各有一处，若绑定自定义域名需两处同步（agent 文件内有注释说明）。
+- **全局 UI 交互位置**：阅读进度条、回顶按钮（含进度环）、灯箱、代码复制按钮都在 [BaseLayout.astro](src/layouts/BaseLayout.astro) body 末尾的内联 `<script>` 实现，样式在 global.css，不引第三方库。新增全局交互沿用此模式（页面级交互放各自页面 script）。
+- **链接 hover 下划线坑（踩过）**：全局 `a:hover { text-decoration: underline }` 会与 `.prose a` 的背景渐变动画线**叠加成双下划线**，且 `a:hover`（0-1-1）优先级会击败 `.path-card` 的 `text-decoration: none`（0-1-0）。已修复：`.prose a:hover` 与 `.path-card:hover` 都显式 `text-decoration: none`。**新增块状/文字链接样式时，hover 必须显式处理 text-decoration，别依赖全局 a:hover**。
+- **深色模式 CSS 变量**：变量必须同时加进两处 dark 块（`:root[data-theme="dark"]` 2 空格缩进 + `@media (prefers-color-scheme: dark)` 4 空格缩进），漏一处会导致跟随系统深色时样式错乱（SVG 文字对比度修复踩过）。
 
 ## 部署与 CI
 
 - 已配置 GitHub Actions（[.github/workflows/deploy.yml](.github/workflows/deploy.yml)）：push master → build → 死链门禁 → `tcb hosting deploy dist`。
 - CI 认证走 GitHub Secrets（`CLOUDBASE_SECRET_ID`/`CLOUDBASE_SECRET_KEY`，或环境 API Key 方式），密钥由用户管理，不需要也无法代配。
+- **验证部署生效**：`curl -sI <线上地址>/页面路径 | grep -i last-modified`——时间戳等于 CI 部署时刻即生效；再 `curl -s` 页面 HTML grep 新特征字符串确认内容上线（不需要浏览器）。
 - 线上地址：https://ai-pm-site-d0g2id0usfe50d5ab-1471526534.tcloudbaseapp.com

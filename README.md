@@ -19,7 +19,7 @@
 
 - [Astro](https://astro.build/) — 静态站点生成
 - 部署于腾讯云 CloudBase
-- 前端功能：深色模式切换、图片灯箱、JSON-LD、Pagefind 全文搜索
+- 前端功能：深色模式切换、图片灯箱、阅读进度条、回到顶部（带进度环）、JSON-LD、Pagefind 全文搜索
 
 ## 本地开发
 
