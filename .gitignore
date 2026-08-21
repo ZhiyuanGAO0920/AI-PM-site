@@ -28,8 +28,7 @@ desktop.ini
 *.log
 npm-debug.log*
 
-# Large media (regenerable from assets/)
-public/ai-pm-site-intro.mp4
+# 首页视频：public 版为已压缩的最终交付物（git 跟踪，CI 构建需要它），assets/ 保留原始素材
 
 # TRAE workspace
 .trae/

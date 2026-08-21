@@ -42,7 +42,7 @@
 
 - **Nav current 传参**：页面组件给 `<BaseLayout current>` 传值统一带尾斜杠（如 `current="/about/"`）；Nav 已兼容无尾斜杠，但新代码别引入不一致。
 - **求职 Agent（public/agent/）**：`app.js` / `profile.js` / `sample-data.js` 必须用 `npm run sync:agent` 同步，**禁止手改**（源仓库是唯一事实源）；`index.html` / `styles.css` 是作品集适配版，手动维护，**不能被同步脚本覆盖**。
-- **首页视频 `ai-pm-site-intro.mp4`**：12MB 是正常体积（272s @ 371kbps，moov 已前置可流式播放），**不要压缩转码**；它被 .gitignore 排除，重建时从 `assets/` 重新生成。
+- **首页视频 `ai-pm-site-intro.mp4`**：12MB 是正常体积（272s @ 371kbps，moov 已前置可流式播放），**不要压缩转码**；它已 git 跟踪（CI 构建需要它，曾因被 gitignore 导致 CI 死链门禁拦截），原始素材在 `assets/`。
 - **邮箱防爬**：Footer 与 about 页用 `mail-reveal` 模式（`data-u`/`data-d` 拼接），新增联系入口沿用此模式，不要直接写死邮箱文本。
 - **OG 图**：`gen-og.py` 只生成全局默认图 `og-default.png`；各页面共用，未做 per-page 图（有意取舍，勿自行扩展）。
 - **域名**：`site` 配置在 [astro.config.mjs](astro.config.mjs) 与 [public/agent/index.html](public/agent/index.html) 头部的 canonical/OG 绝对地址各有一处，若绑定自定义域名需两处同步（agent 文件内有注释说明）。
