@@ -1,0 +1,50 @@
+# 推送 master 后自动构建 + 死链门禁 + 部署到腾讯云 CloudBase 静态托管
+# 需要的 GitHub Secrets（repo Settings → Secrets and variables → Actions）：
+#   方式 A（推荐，最小权限）：CLOUDBASE_API_KEY —— CloudBase 控制台「环境 → API Key」生成的环境级密钥
+#   方式 B（账号级密钥）：CLOUDBASE_SECRET_ID + CLOUDBASE_SECRET_KEY —— 腾讯云 API 密钥管理生成的 SecretId/SecretKey
+# 两种方式任选其一，选 A 时注释掉 login 步骤的 B 行、放开 A 行。
+
+name: Deploy to CloudBase
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch: {} # 支持手动触发
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          pip install pillow
+
+      - name: Build
+        run: npm run build
+
+      - name: Check internal links (gate)
+        run: node scripts/check-links.mjs
+
+      - name: Deploy to CloudBase
+        env:
+          CLOUDBASE_ENV_ID: ${{ secrets.CLOUDBASE_ENV_ID }}
+        run: |
+          # 方式 A：环境级 API Key（推荐）
+          # npx tcb login --cloudbase-api-key "${{ secrets.CLOUDBASE_API_KEY }}" -e "${{ secrets.CLOUDBASE_ENV_ID }}"
+          # 方式 B：账号级永久密钥
+          npx tcb login --apiKeyId "${{ secrets.CLOUDBASE_SECRET_ID }}" --apiKey "${{ secrets.CLOUDBASE_SECRET_KEY }}"
+          npx tcb hosting deploy dist
