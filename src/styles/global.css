@@ -219,8 +219,11 @@ a:hover {
 }
 /* SVG 文字颜色跟随主题（深色模式下 #5b6470 对比度不足 4.5:1） */
 .hv-old text,
-.hv-svg > text {
+.hv-svg > text:not(.hv-core-label) {
   fill: var(--fg-soft);
+}
+.hv-svg > text.hv-core-label {
+  fill: #fff;
 }
 .hv-link {
   stroke-dasharray: 5 7;
@@ -351,6 +354,7 @@ a:hover {
   border-color: var(--accent-fg);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  text-decoration: none; /* 卡片是块状链接，hover 不应出现文字下划线 */
 }
 .path-card-featured {
   border-color: var(--accent-fg);
@@ -735,6 +739,7 @@ a:hover {
 }
 .prose a:hover {
   background-size: 100% 1.5px;
+  text-decoration: none; /* 用背景线替代 text-decoration，避免双线叠加 */
 }
 .prose ul,
 .prose ol {
@@ -1259,5 +1264,69 @@ button:focus-visible {
     top: 0.5rem;
     right: 0.75rem;
     font-size: 1.6rem;
+  }
+}
+
+/* ---------- 回到顶部 + 进度环 ---------- */
+.to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 46px;
+  height: 46px;
+  border: none;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  border-radius: 50%;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  z-index: 60;
+}
+.to-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+.to-top:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.24);
+}
+.to-top-ring {
+  position: absolute;
+  inset: 0;
+  transform: rotate(-90deg);
+}
+.to-top-track {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 3;
+}
+.to-top-ind {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 131.95;
+  stroke-dashoffset: 131.95;
+  transition: stroke-dashoffset 0.1s linear;
+}
+.to-top-arrow {
+  font-size: 18px;
+  line-height: 1;
+  pointer-events: none;
+}
+@media (max-width: 640px) {
+  .to-top {
+    right: 16px;
+    bottom: 16px;
+    width: 42px;
+    height: 42px;
   }
 }

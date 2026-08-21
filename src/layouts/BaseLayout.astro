@@ -63,6 +63,13 @@ const pageUrl = new URL(Astro.url.pathname, siteUrl).href;
       <slot />
     </main>
     <Footer />
+    <button id="to-top" class="to-top" aria-label="回到顶部">
+      <svg class="to-top-ring" viewBox="0 0 46 46" width="46" height="46" aria-hidden="true">
+        <circle class="to-top-track" cx="23" cy="23" r="21" />
+        <circle class="to-top-ind" cx="23" cy="23" r="21" />
+      </svg>
+      <span class="to-top-arrow">↑</span>
+    </button>
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="图片预览">
       <button class="lightbox-close" type="button" aria-label="关闭">&times;</button>
       <img src="" alt="" />
@@ -80,6 +87,26 @@ const pageUrl = new URL(Astro.url.pathname, siteUrl).href;
         update();
         window.addEventListener('scroll', update, { passive: true });
         window.addEventListener('resize', update);
+      }
+      // 回到顶部按钮 + 进度环
+      const toTop = document.getElementById('to-top');
+      if (toTop) {
+        const ind = toTop.querySelector('.to-top-ind');
+        const C = 2 * Math.PI * 21;
+        const updateTop = () => {
+          const h = document.scrollingElement || document.documentElement;
+          const total = h.scrollHeight - h.clientHeight;
+          const p = total > 0 ? h.scrollTop / total : 0;
+          ind.style.strokeDashoffset = String(C * (1 - p));
+          toTop.classList.toggle('show', h.scrollTop > 300);
+        };
+        updateTop();
+        window.addEventListener('scroll', updateTop, { passive: true });
+        window.addEventListener('resize', updateTop);
+        toTop.addEventListener('click', () => {
+          const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+          window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+        });
       }
       // 代码块复制按钮
       document.querySelectorAll('.prose pre').forEach(pre => {
